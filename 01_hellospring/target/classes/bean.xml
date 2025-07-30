@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="toyota1" class="com.model.Toyota">
+		<constructor-arg value="7500000"></constructor-arg>
+		<constructor-arg ref="toyotaEngine"></constructor-arg>
+	</bean>
+	
+	<bean id="toyota2" class="com.model.Toyota">
+		<property name="price" value="5000000"></property>
+		<property name="engine" ref="toyotaEngine"></property>
+	</bean>
+	
+	<bean id="toyota3" class="com.model.Toyota" autowire="byType"></bean>
+	
+	<bean id="toyotaEngine" class="com.model.BenzEngine" ></bean>
+
+	<bean id="engine" class="com.model.ToyotaEngine" primary="true"></bean>
+</beans>
