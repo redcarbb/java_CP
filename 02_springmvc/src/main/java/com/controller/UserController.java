@@ -75,4 +75,14 @@ public class UserController {
 		model.addAttribute("user", vo);
 		return "updateUser";
 	}
+	
+	@PostMapping("/update")
+	public String updateUser(UserVo user) {
+		System.out.println("UserVo: " + user);
+		// 更新資料
+		userService.upateUser(user);
+		
+		return "redirect:/toUserList";
+		
+	}
 }

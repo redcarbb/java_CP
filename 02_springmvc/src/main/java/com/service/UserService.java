@@ -62,6 +62,7 @@ public class UserService {
 		UserEntity entity = userDao.findById(id);
 
 		UserVo vo = new UserVo();
+		vo.setId(entity.getId());
 		vo.setUsername(entity.getUsername());
 		vo.setPassword(entity.getPassword());
 		vo.setEmail(entity.getEmail());
@@ -96,6 +97,25 @@ public class UserService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         // 將 Date 物件轉換為 String
         return formatter.format(date);
+	}
+	
+	public void upateUser(UserVo userVo) {
+		UserEntity user = userDao.findById(Long.valueOf(userVo.getId()));
+
+		// "", "    "
+		if (userVo.getPassword() != null && !userVo.getPassword().isBlank()) {
+			user.setPassword(userVo.getPassword());
+		}
+
+		if (userVo.getEmail() != null && !userVo.getEmail().isBlank()) {
+			user.setEmail(userVo.getEmail());
+		}
+
+		if (userVo.getBirthDay() != null && !userVo.getBirthDay().isBlank()) {
+			user.setBirthDay(parseDate(userVo.getBirthDay()));
+		}
+
+		userDao.updateUser(user);
 	}
 	
 }

@@ -50,5 +50,11 @@ public class UserVo {
 	public void setBirthDay(String birthDay) {
 		this.birthDay = birthDay;
 	}
+
+	@Override
+	public String toString() {
+		return "UserVo [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", birthDay=" + birthDay + "]";
+	}
 	
 }
