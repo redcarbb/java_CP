@@ -26,7 +26,7 @@
 
         <!-- 資料庫密碼，自行調整 -->
         <property name="hibernate.connection.password">
-            1234
+            123456
         </property>
 
         <!-- 是否顯示SQL於console -->
