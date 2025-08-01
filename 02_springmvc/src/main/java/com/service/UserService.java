@@ -11,10 +11,10 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	public boolean checkLogin(String username, String password) {
 		// 呼叫 Dao/Repository
-		
+
 		UserEntity user = userDao.findByUsernameAndPassword(username, password);
 		if (user != null) {
 			return true;
@@ -23,5 +23,14 @@ public class UserService {
 		}
 		// return user != null;
 	}
-	
+
+	public void addUser(String username, String password) {
+		UserEntity entity = new UserEntity();
+		entity.setUsername(username);
+		entity.setPassword(password);
+
+		userDao.addUser(entity);
+
+	}
+
 }
