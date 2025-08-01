@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import com.entity.UserEntity;
 
 public interface UserDao {
@@ -15,4 +17,9 @@ public interface UserDao {
 	
 	// Delete
 	public void delUser(UserEntity userEnity);
+	
+	// 查出全部USER
+	public List<UserEntity> findAll();
+	
+	public UserEntity findById(Long id);
 }

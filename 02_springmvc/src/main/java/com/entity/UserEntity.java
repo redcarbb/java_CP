@@ -26,6 +26,18 @@ public class UserEntity {
 	@Column(name = "birth_day")
 	private Date birthDay;
 
+	public UserEntity() {
+		
+	}
+	
+	public UserEntity(String username, String password, String email, Date birthDay) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.birthDay = birthDay;
+	}
+
 	public Integer getId() {
 		return id;
 	}
