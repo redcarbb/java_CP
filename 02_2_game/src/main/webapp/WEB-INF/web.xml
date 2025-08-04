@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+
+    <servlet>
+        <!-- sevlet-name 名稱自訂 -->
+        <servlet-name>02_2_game</servlet-name>
+        <!-- 固定 DispatcherServlet class -->
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- server啟動的時候就載入 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+
+    <servlet-mapping>
+        <!-- sevlet-name 要與上方一致 -->
+        <servlet-name>02_2_game</servlet-name>
+        <!-- 指定哪些請求要被DispatcherServlet處理 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
