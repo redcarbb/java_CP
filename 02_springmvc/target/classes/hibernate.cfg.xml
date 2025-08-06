@@ -24,10 +24,17 @@
 			root
 		</property>
 
+<<<<<<< HEAD
 		<!-- 資料庫密碼，自行調整 -->
 		<property name="hibernate.connection.password">
 			1234
 		</property>
+=======
+        <!-- 資料庫密碼，自行調整 -->
+        <property name="hibernate.connection.password">
+            123456
+        </property>
+>>>>>>> origin/main
 
 		<!-- 是否顯示SQL於console -->
 		<property name="show_sql">
