@@ -6,14 +6,14 @@ public class TodoDto {
 
 	/** 鍵值 */
 	private Long id;
-	
+
 	/** 標題 */
 	private String title;
-	
+
 	/** 到期日 */
 	private Date dueDate;
-	
-	/** 狀態*/
+
+	/** 狀態 */
 	private Integer status;
 
 	public Long getId() {
@@ -47,4 +47,10 @@ public class TodoDto {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "TodoDto [id=" + id + ", title=" + title + ", dueDate=" + dueDate + ", status=" + status + "]";
+	}
+
 }
