@@ -9,10 +9,10 @@
 		<version>3.5.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.course</groupId>
-	<artifactId>04_springboot_h2</artifactId>
+	<groupId>com.jennyandaven</groupId>
+	<artifactId>jainventory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>04_springboot_h2</name>
+	<name>jainventory</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
@@ -43,22 +43,15 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
+		
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

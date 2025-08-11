@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: jainventory
+  datasource:
+    url: jdbc:mysql://localhost:3306/ja_inventory?useSSL=false&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
