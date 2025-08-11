@@ -22,27 +22,38 @@ public class TodoDaoImpl implements TodoDao {
 	@Override
 	public void add(TodoDto dto) {
 
-		String sql = "INSERT INTO TODO (TITLE, DUEDATE, STATUS) VALUES (?, ?, ?) ";
-		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus());
+		String sql = "INSERT INTO TODO (TITLE, DUE_DATE, STATUS, USERID, MEMO) VALUES (?, ?, ?, ?, ?) ";
+		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus(), dto.getUserId(), dto.getMemo());
 	}
 
 	@Override
 	public void update(TodoDto dto) {
-		String sql = "UPDATE TODO SET TITLE = ?, DUEDATE = ?, STATUS = ? WHERE ID =　? ";
+		String sql = "UPDATE TODO SET TITLE = ?, DUE_DATE = ?, STATUS = ? WHERE ID =　? ";
 		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus(), dto.getId());
 		
 	}
 
 	@Override
 	public void delete(Long id) {
-		String sql = "DELETE FROM TODO WHERE ID =　? ";
+		String sql = "DELETE FROM TODO WHERE ID = ? ";
 		jdbcTemplate.update(sql, id);
 		
 	}
 
 	@Override
 	public List<TodoDto> findAll() {
-		String sql = "SELECT * FROM TODO";
+		// String sql = "SELECT * FROM TODO";
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT ");
+		sb.append(" T.ID, ");
+		sb.append(" T.TITLE, ");
+		sb.append(" T.DUE_DATE, ");
+		sb.append(" T.STATUS, ");
+		sb.append(" T.MEMO, ");
+		sb.append(" U.USERNAME ");
+		sb.append(" FROM TODO T ");
+		sb.append(" LEFT JOIN USER U ON T.USERID = U.ID ");
+		
 		RowMapper<TodoDto> rowMapper = new RowMapper<>() {
 			@Override
 			public TodoDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -52,10 +63,11 @@ public class TodoDaoImpl implements TodoDao {
 				dto.setDueDate(rs.getDate("DUE_DATE"));
 				dto.setStatus(rs.getInt("STATUS"));
 				dto.setMemo(rs.getString("MEMO"));
+				dto.setUsername(rs.getString("USERNAME"));
 				return dto;
 			}
 		};
-		return jdbcTemplate.query(sql, rowMapper);
+		return jdbcTemplate.query(sb.toString(), rowMapper);
 	}
 
 	@Override

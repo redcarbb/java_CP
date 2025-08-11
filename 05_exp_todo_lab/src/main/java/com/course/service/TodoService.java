@@ -25,4 +25,15 @@ public class TodoService {
 
 		return voList;
 	}
+	
+	public void addTodo(TodoVo todoVo) {
+		// Vo -> Dto
+		todoVo.setStatus("0");
+		TodoDto dto = helper.convertToDto(todoVo);
+		todoDao.add(dto);
+	}
+
+	public void deleteTodo(Long id) {
+		todoDao.delete(id);
+	}
 }

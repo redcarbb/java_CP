@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>新增代辦事項</title>
@@ -7,21 +7,21 @@
 <body>
 <h1>新增代辦事項</h1>
 
-<form action="" method="POST">
+<form th:action="@{/todo}" th:object="${todoObj}" method="POST">
     <div>
         <label for="title">標題:</label>
-        <input type="text" id="title" />
+        <input type="text" id="title" th:field="*{title}" />
         <span class="error"></span>
     </div>
     <div>
         <label for="dueDate">到期日:</label>
-        <input type="date" id="dueDate" />
+        <input type="date" id="dueDate" th:field="*{dueDate}"/>
         <span class="error"></span>
     </div>
     
     <div>
         <label for="memo">備註:</label>
-        <input type="text" id="memo" />
+        <input type="text" id="memo" th:field="*{memo}"/>
     </div>
     <div>
         <button type="submit">新增待辦事項</button>
