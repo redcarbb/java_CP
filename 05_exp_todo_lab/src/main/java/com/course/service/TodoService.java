@@ -36,4 +36,14 @@ public class TodoService {
 	public void deleteTodo(Long id) {
 		todoDao.delete(id);
 	}
+	
+	/**
+	 * 透過 ID 搜尋
+	 * @param id
+	 * @return
+	 */
+	public TodoVo getTodoById(Long id) {
+		TodoDto dto = todoDao.findById(id);
+		return helper.convertToVo(dto);
+	}
 }

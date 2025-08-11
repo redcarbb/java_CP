@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -101,5 +102,32 @@ public class TodoDaoImpl implements TodoDao {
 			return dto;
 		};
 		return jdbcTemplate.query(sb.toString(), rowMapper, params.toArray());
+	}
+
+	@Override
+	public TodoDto findById(Long id) {
+		String sql = "SELECT * FROM TODO WHERE ID = ?";
+		RowMapper<TodoDto> rowMapper = new RowMapper<>() {
+			@Override
+			public TodoDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+				TodoDto dto = new TodoDto();
+				
+				dto.setId(rs.getLong("ID"));
+				dto.setTitle(rs.getString("TITLE"));
+				dto.setDueDate(rs.getDate("DUE_DATE"));
+				dto.setStatus(rs.getInt("STATUS"));
+				dto.setMemo(rs.getString("MEMO"));
+				return dto;
+			}
+		};
+		
+		TodoDto result = null;
+		try {
+			result = jdbcTemplate.queryForObject(sql, rowMapper, id);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("查無資料");
+		}
+		
+		return result;
 	}
 }

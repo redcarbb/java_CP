@@ -30,7 +30,7 @@
 		<td th:if="${todo.status == '1'}" th:text="已完成">狀態</td>
 		<td th:text="${todo.memo}">備註</td>
 		<td>
-			<a>編輯</a>
+			<a th:href="@{/toUpdatePage/{id} (id=${todo.id})}">編輯</a>
 			<a th:href="@{/delete/{id} (id=${todo.id})}">刪除</a>
 		</td>
 	</tr>

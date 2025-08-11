@@ -35,4 +35,11 @@ public interface TodoDao {
 	 * @return
 	 */
 	List<TodoDto> findByTitle(String title);
+	
+	/**
+	 * 依ID查詢
+	 * @param title
+	 * @return
+	 */
+	TodoDto findById(Long id);
 }

@@ -51,4 +51,11 @@ public class TodoController {
     	return "redirect:/";
     }
     
+    @GetMapping("/toUpdatePage/{id}")
+    public String toUpdatePage(@PathVariable Long id, Model model) {
+    	TodoVo vo = todoService.getTodoById(id);
+    	model.addAttribute("todoObj", vo);
+    	return "editTodoPage";
+    }
+    
 }
