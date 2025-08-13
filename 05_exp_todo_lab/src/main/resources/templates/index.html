@@ -7,6 +7,11 @@
 <body>
 <h1 th:text="${title}">待辦事項</h1>
 
+<div>
+	<img th:src="@{img/todo2.jpg}" width="800px"/>
+</div>
+
+
 <a th:href="@{/toAddPage}">新增</a>
 
 <hr/>
@@ -31,13 +36,18 @@
 		<td th:text="${todo.memo}">備註</td>
 		<td>
 			<a th:href="@{/toUpdatePage/{id} (id=${todo.id})}">編輯</a>
+<!-- 			<a href="/toUpdatePage/1">編輯</a> -->
 			<a th:href="@{/delete/{id} (id=${todo.id})}">刪除</a>
 		</td>
 	</tr>
 </table>
 
-<div>
+<div th:replace="~{common :: footer2}">
 © 2025 待辦事項. All Rights Reserved.
+</div>
+
+<div th:include="~{common :: footer2}">
+
 </div>
 
 </body>

@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>編輯代辦事項</title>
 </head>
 <body>
 <h1>編輯代辦事項</h1>
-<form action="" method="POST">
-	<input type="hidden" id="id" />
+<form th:action="@{/editTodo}" th:object="${todoObj}" method="POST">
+	<input type="hidden" id="id" th:field="*{id}"/>
     <div>
         <label for="title">標題:</label>
-        <input type="text" id="title" />
+        <input type="text" id="title" th:field="*{title}"/>
     </div>
     <div>
         <label for="dueDate">到期日:</label>
-        <input type="date" id="dueDate" />
+        <input type="date" id="dueDate" th:field="*{dueDate}"/>
     </div>
     <div>
         <label>狀態:</label>
-        <input type="radio" id="notCompleted" name="status" value="0" />
+        <input type="radio" id="notCompleted" name="status" value="0" th:field="*{status}" />
         <label for="notCompleted">未完成</label>
-        <input type="radio" id="completed" name="status" value="1" />
+        <input type="radio" id="completed" name="status" value="1" th:field="*{status}" />
         <label for="completed">已完成</label>
     </div>
     <div>
         <label for="memo">備註:</label>
-        <input type="text" id="memo" />
+        <input type="text" id="memo" th:field="*{memo}"/>
     </div>
     <div>
         <button type="submit">更新待辦事項</button>
     </div>
 </form>
+<div th:replace="~{common :: footer2}">
+© 2025 待辦事項. All Rights Reserved.
+</div>
 </body>
 </html>
