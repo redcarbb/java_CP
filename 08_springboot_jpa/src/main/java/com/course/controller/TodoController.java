@@ -3,6 +3,9 @@ package com.course.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -70,4 +73,30 @@ public class TodoController {
 	public List<TodoEntity> getTodoByDueDateBetween() {
 		return todoService.getTodoIn();
 	}
+	
+	@Operation(summary = "取得待辦事項(findByCondition)", tags = "Query")
+	@GetMapping("/todo-query/{title}")
+	public List<TodoEntity> getTodoByCondition(@PathVariable String title) {
+		return todoService.getTodoByTitleQuery(title);
+	}
+	
+	@Operation(summary = "修改待辦事項標題(updateTodoTitle)", tags = "@Query")
+	@PostMapping("/todo-title-update/{id}/{title}")
+	public ResponseEntity<String> updateTodoTitle(@PathVariable Long id, @PathVariable String title) {
+		todoService.updateTodoTitle(id, title);
+		return ResponseEntity.ok("OK");
+	}
+	
+	@Operation(summary = "取得所有待辦事項(分頁)(findAll)", tags = "分頁")
+	@GetMapping("/todos-page/{pageNumber}/{pageSize}")
+	public Page<TodoEntity> getAllTodoListPageable(@PathVariable Integer pageNumber,@PathVariable Integer pageSize) {
+		return todoService.getAllTodoPageable(pageNumber, pageSize);
+	}
+	
+	@Operation(summary = "取得所有待辦事項2(分頁)(findAll)", tags = "分頁")
+	@GetMapping("/todos-page2")
+	public Page<TodoEntity> getAllTodoListPageable2(@RequestParam String title, Pageable pageable) {
+		return todoService.getAllTodoPageable2(pageable);
+	}
+	
 }
