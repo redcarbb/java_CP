@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${#ids.prev('product') != null} ? '編輯產品' : '新增產品'">產品</title>
+  <style>.err{color:#c00;font-size:.9em}</style>
+</head>
+<body>
+  <h3 th:text="${product.id} != null ? '編輯產品' : '新增產品'">產品</h3>
+
+  <form th:action="${product.id} != null ? @{|/products/${product.id}|} : @{/products}"
+        th:object="${product}" method="post">
+
+    <div>SKU：
+      <input th:field="*{sku}" required>
+      <span class="err" th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></span>
+    </div>
+
+    <div>名稱：
+      <input th:field="*{name}" required>
+      <span class="err" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div>單位：<input th:field="*{unit}"></div>
+
+    <div>成本：
+      <input th:field="*{costPrice}" type="number" step="0.01" min="0" required>
+      <span class="err" th:if="${#fields.hasErrors('costPrice')}" th:errors="*{costPrice}"></span>
+    </div>
+
+    <div>售價：
+      <input th:field="*{salePrice}" type="number" step="0.01" min="0" required>
+      <span class="err" th:if="${#fields.hasErrors('salePrice')}" th:errors="*{salePrice}"></span>
+    </div>
+
+    <div>上架：<input th:field="*{active}" type="checkbox"></div>
+
+    <p>
+      <button type="submit">儲存</button>
+      <a th:href="@{/products}">取消</a>
+    </p>
+  </form>
+</body>
+</html>

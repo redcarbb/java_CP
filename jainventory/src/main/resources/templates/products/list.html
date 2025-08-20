@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>產品列表</title>
+  <style>table{border-collapse:collapse} th,td{padding:.4rem;border:1px solid #ccc}</style>
+</head>
+<body>
+  <h3>產品列表</h3>
+  <p><a th:href="@{/products/new}">＋ 新增產品</a></p>
+  <table>
+    <tr>
+      <th>ID</th><th>SKU</th><th>名稱</th><th>單位</th>
+      <th>成本</th><th>售價</th><th>上架</th><th>操作</th>
+    </tr>
+    <tr th:each="p : ${products}">
+      <td th:text="${p.id}"></td>
+      <td th:text="${p.sku}"></td>
+      <td th:text="${p.name}"></td>
+      <td th:text="${p.unit}"></td>
+      <td th:text="${p.costPrice}"></td>
+      <td th:text="${p.salePrice}"></td>
+      <td th:text="${p.active}"></td>
+      <td>
+        <a th:href="@{|/products/${p.id}/edit|}">編輯</a>
+        <form th:action="@{|/products/${p.id}/delete|}" method="post" style="display:inline">
+          <button type="submit" onclick="return confirm('確定刪除？')">刪除</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
