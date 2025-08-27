@@ -38,6 +38,12 @@ public class ProductDto {
 
 	}
 
+	public ProductDto(String code, String name) {
+		super();
+		this.code = code;
+		this.name = name;
+	}
+
 	public ProductDto(Long id, String code, String name, BigDecimal listPrice, BigDecimal salesPrice, String memo) {
 		super();
 		this.id = id;

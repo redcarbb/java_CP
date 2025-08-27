@@ -1,5 +1,7 @@
 package com.course.controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.course.dto.ProductDto;
 import com.course.entity.ProductEntity;
+import com.course.exception.ActionException;
 import com.course.model.ApiResponse;
 import com.course.service.ProductService;
 import com.course.vo.ProductQueryParam;
@@ -81,6 +84,25 @@ public class ProductController {
 	public ResponseEntity<List<ProductDto>> getProductByCondition(ProductQueryParam queryParam) {
 		List<ProductDto> productList = productService.getProductByCondition(queryParam);
 		return ResponseEntity.ok().body(productList);
+	}
+	
+	@Operation(summary = "取得所有商品(部分欄位)", tags = "商品")
+	@GetMapping("/products-query")
+	public ResponseEntity<List<ProductVo>> getAllProductQuery() {
+		List<ProductVo> productList = productService.getAllProductQuery();
+		return ResponseEntity.ok().body(productList);
+	}
+	
+	@Operation(summary = "拋出錯誤", tags = "錯誤")
+	@GetMapping("/exception")
+	public void throwException() throws ActionException {
+
+		try {
+			FileInputStream fis = new FileInputStream("abc.jpg");
+		} catch (FileNotFoundException e) {
+			throw new ActionException("506", "檔案不存在", e);
+		}
+
 	}
 	
 }
