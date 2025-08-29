@@ -34,8 +34,18 @@ public class ProductDto {
 	
 	private String cname;
 
+	private Long ProductId;
+	
 	public ProductDto() {
 
+	}
+
+	public Long getProductId() {
+		return ProductId;
+	}
+
+	public void setProductId(Long productId) {
+		ProductId = productId;
 	}
 
 	public ProductDto(String code, String name) {

@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8086
 spring:
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/xe
@@ -19,3 +19,6 @@ logging:
     com.course: trace
   file:
     path: C:\Users\student\log
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
