@@ -31,6 +31,12 @@ public class ProductBatisServiceImpl implements ProductService {
 	@Override
 	public void addProduct(ProductVo vo) {
 		// TODO Auto-generated method stub
+		//productMapper.insertProduct(vo.getCode(), vo.getName());
+		
+		Long productSeq = productMapper.getProductSeq();
+		vo.setId(productSeq);
+		productMapper.insertProductByVo(vo);
+		productMapper.insertPrice(vo.getId(), vo.getListPrice(), vo.getSalesPrice());
 		
 	}
 
@@ -52,27 +58,30 @@ public class ProductBatisServiceImpl implements ProductService {
 //			voList.add(vo);
 //		}
 		
+
 		
-		
-		// reviews
-		// Key: product, Value: Memos
-		Map<Long, List<String>> memoMap = new HashMap<>();
-		
+		// 先撈出所有的評論資料，再將資料依照 productId 分組
 		List<ProductDto> reviews = productMapper.findAllReview();
+//		Map<Long, List<String>> memoMap = new HashMap<>();
 
-		for (ProductDto d : reviews) {
-			Long id = d.getProductId();
-			if (memoMap.containsKey(id)) {
-				List<String> ms = memoMap.get(id);
-				ms.add(d.getMemo());
-			} else {
-				List<String> m = new ArrayList<>();
-				m.add(d.getMemo());
-				memoMap.put(id, m);
-			}
-		}
+		// 將資料群組為 Map，Key: productId, Value: List<Memo>
+//		for (ProductDto reviewData : reviews) {
+//			Long id = reviewData.getProductId();
+//			if (memoMap.containsKey(id)) {
+//				List<String> existMemoList = memoMap.get(id);
+//				existMemoList.add(reviewData.getMemo());
+//			} else {
+//				List<String> tempMemoList = new ArrayList<>();
+//				tempMemoList.add(reviewData.getMemo());
+//				memoMap.put(id, tempMemoList);
+//			}
+//		}
 		
-
+	       Map<Long, List<String>> memoMap = reviews.stream()
+	               .collect(Collectors.groupingBy(
+	                   ProductDto::getProductId,
+	                   Collectors.mapping(ProductDto::getMemo, Collectors.toList())
+	               ));
 		
 		return dtos.stream().map(dto -> {
 			ProductVo vo = new ProductVo();
@@ -107,14 +116,14 @@ public class ProductBatisServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDto> getAllProductData() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		return productMapper.selectProductWithReviews();
 	}
 
 	@Override
 	public List<ProductDto> getProductByCondition(ProductQueryParam queryParam) {
-		// TODO Auto-generated method stub
-		return null;
+		return productMapper.findByCondition(queryParam);
 	}
 
 	@Override
@@ -132,4 +141,14 @@ public class ProductBatisServiceImpl implements ProductService {
 
 		return vo;
 	}
+	
+	public ProductVo getProductByCodeXml(String code) {
+		ProductDto dto = productMapper.findByCodeXml(code);
+		ProductVo vo = new ProductVo();
+		vo.setCode(dto.getCode());
+		vo.setName(dto.getName());
+
+		return vo;
+	}
+	
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.course.mapper.ProductMapper">
+	<cache/>
+<!-- 	<select id="findByCodeXml" resultType="com.course.dto.ProductDto"> -->
+<!-- 		SELECT * FROM PRODUCT P WHERE CODE = #{CODE} -->
+<!-- 	</select> -->
+	<select id="findByCodeXml" resultType="productDto" useCache="false">
+		SELECT * FROM PRODUCT P 
+		<where>
+			AND CODE = #{CODE}
+		</where>
+	</select>
+	
+	<select id="findByCondition" resultType="productDto" parameterType="com.course.vo.ProductQueryParam">
+		SELECT 
+		*
+		FROM PRODUCT P
+		LEFT JOIN PRODUCT_PRICE R ON R.PRODUCT_ID = P.ID
+		<where>
+			<if test="productName != null and productName != '' ">
+				AND P.NAME = #{productName}
+			</if>
+			
+			<if test="minPrice != null">
+				AND R.SALES_PRICE &gt;= #{minPrice}
+			</if>
+			
+			<if test="maxPrice != null">
+				AND R.SALES_PRICE &lt;= #{maxPrice}
+			</if>
+		
+		</where>
+	</select>
+	
+	<resultMap id="ProductWithReviewsResultMap" type="productDto">
+	    <id property="id" column="p_id"/>
+	    <result property="code" column="code"/>
+	    <result property="name" column="name"/>
+	
+	    <collection property="memos" ofType="string">
+	        <result column="memo"/>
+	    </collection>
+	</resultMap>
+	
+	<select id="selectProductWithReviews" resultMap="ProductWithReviewsResultMap">
+	    select 
+	    p.id as p_id,
+	    p.code,
+	    p.name,
+	    v.memo
+	    from product p
+	    left join product_review v on v.product_id = p.id
+	</select>
+
+</mapper>

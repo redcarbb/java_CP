@@ -204,5 +204,11 @@ public class ProductJpaServiceImpl implements ProductService {
 			return vo;
 		}).collect(Collectors.toList());
 	}
+
+	@Override
+	public ProductVo getProductByCodeXml(String code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
