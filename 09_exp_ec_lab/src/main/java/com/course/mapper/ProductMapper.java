@@ -47,4 +47,6 @@ public interface ProductMapper {
 	public List<ProductDto> findByCondition(ProductQueryParam condition);
 	
 	public List<ProductDto> selectProductWithReviews();
+	
+	public void updateProductXml(ProductVo vo);
 }

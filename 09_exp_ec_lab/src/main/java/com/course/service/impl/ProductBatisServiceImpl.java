@@ -116,8 +116,6 @@ public class ProductBatisServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDto> getAllProductData() {
-		
-		
 		return productMapper.selectProductWithReviews();
 	}
 
@@ -149,6 +147,11 @@ public class ProductBatisServiceImpl implements ProductService {
 		vo.setName(dto.getName());
 
 		return vo;
+	}
+	
+	@Override
+	public void updateProductPrice(ProductVo vo) {
+		productMapper.updateProductXml(vo);
 	}
 	
 }

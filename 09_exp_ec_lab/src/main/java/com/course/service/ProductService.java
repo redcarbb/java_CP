@@ -59,4 +59,6 @@ public interface ProductService {
 	
 	ProductVo getProductByCodeXml(String code);
 
+	void updateProductPrice(ProductVo vo);
+
 }

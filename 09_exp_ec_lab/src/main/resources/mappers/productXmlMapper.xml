@@ -53,5 +53,18 @@
 	    from product p
 	    left join product_review v on v.product_id = p.id
 	</select>
+	
+	<update id="updateProductXml" parameterType="com.course.vo.ProductVo">
+		UPDATE PRODUCT 
+		
+<!-- 		SET CODE = ?, NAME = ? -->
+	    <set>
+	        <if test="code != null and code != '' ">CODE = #{code},</if>
+	        <if test="name != null and name != '' ">NAME = #{name},</if>
+	    </set>
+	    
+	    WHERE ID = #{id}
+	    
+	</update>
 
 </mapper>

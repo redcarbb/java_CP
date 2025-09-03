@@ -210,5 +210,11 @@ public class ProductJpaServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void updateProductPrice(ProductVo vo) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

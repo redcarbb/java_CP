@@ -29,11 +29,16 @@ import jakarta.validation.Valid;
 @RequestMapping("/ec")
 public class ProductController {
 
+	
 	@Autowired
 	// @Qualifier("productJpaServiceImpl")
 	@Qualifier("productBatisServiceImpl")
 	private ProductService productService;
 	
+	@GetMapping("/hello")
+	public String hello() {
+		return "hello";
+	}
 	@Operation(summary = "新增商品", tags = "商品")
 	@PostMapping("/product")
 	public ResponseEntity<String> addProduct(@Valid @RequestBody ProductVo vo) {
@@ -113,5 +118,12 @@ public class ProductController {
 	public ResponseEntity<ProductVo> getProductByCode(@PathVariable String code) {
 		ProductVo product = productService.getProductByCodeXml(code);
 		return ResponseEntity.ok().body(product);
+	}
+	
+	@Operation(summary = "更新商品", tags = "商品")
+	@PostMapping("/update-product")
+	public ResponseEntity<String> updateProductPrice(@RequestBody ProductVo vo) {
+		productService.updateProductPrice(vo);
+		return ResponseEntity.ok().body("OK");
 	}
 }
