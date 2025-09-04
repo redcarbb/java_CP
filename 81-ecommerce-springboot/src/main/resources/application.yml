@@ -19,6 +19,6 @@ spring:
 # 映射外部目錄 /data/product-images/ 到 URL 路徑 /images/
   web:
     resources:
-      static-locations: file:C:\Users\student\static
+      static-locations: file:C:\Users\redca\course\static\images
 mybatis:
   mapper-locations: classpath:mappers/*.xml
